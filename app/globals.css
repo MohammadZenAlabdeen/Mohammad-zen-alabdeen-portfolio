@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Exo+2:wght@300;400;600&family=Cairo:wght@400;600;700&display=swap');
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-[#0a0a0f] text-white;
+    font-family: 'Exo 2', sans-serif;
+    width: 100%;
+    position: relative;
+    overflow-x: clip; /* More aggressive than hidden */
+  }
+
+  html[dir="rtl"] body {
+    font-family: 'Cairo', sans-serif;
+  }
+
+  /* Ensure all elements respect boundaries */
+  * {
+    max-width: 100vw;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .font-cairo {
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-purple-500 to-red-600 bg-clip-text text-transparent;
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+  }
+
+  .phone-screen {
+    @apply bg-[#0a0a0f] border border-cyan-400/20 rounded-[2.5rem] overflow-hidden;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Grid Background - Fixed for mobile */
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(0,255,255,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridPulse 4s ease-in-out infinite;
+    pointer-events: none;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  /* Scroll Reveal */
+  .scroll-reveal {
+    @apply opacity-0 translate-y-8;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    max-width: 100%;
+  }
+
+  .scroll-reveal.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+  .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+  .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+  .scroll-reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* Typewriter */
+  .typewriter {
+    animation: blink 0.7s step-end infinite;
+  }
+
+  /* Scroll Indicator */
+  .scroll-indicator {
+    animation: bounce-scroll 2s ease-in-out infinite;
+  }
+
+  /* Project Slide */
+  .project-slide {
+    animation: slideIn 0.5s ease-out;
+  }
+
+  /* Spinning Ring */
+  .spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  /* Floating Particle - UPDATED to prevent overflow */
+  .particle {
+    animation: float-mobile linear infinite;
+    transform: translateZ(0); /* Force GPU acceleration */
+    backface-visibility: hidden;
+    perspective: 1000px;
+    max-width: 100%;
+    max-height: 100%;
+    will-change: transform;
+  }
+
+  /* Mobile-specific particle constraints */
+  @media (max-width: 768px) {
+    .particle {
+      animation: float-mobile 3s ease-in-out infinite;
+      opacity: 0.4 !important;
+      width: 2px !important;
+      height: 2px !important;
+    }
+    
+    /* Ensure navbar stays on top and doesn't overflow */
+    nav, header, [role="navigation"] {
+      position: relative;
+      z-index: 50;
+      max-width: 100vw;
+      overflow: hidden;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+    
+    /* Fix for any absolutely positioned elements */
+    .fixed, .absolute {
+      max-width: 100vw;
+      overflow: hidden;
+    }
+  }
+
+  /* Prevent horizontal scroll on all elements */
+  .overflow-x-hidden {
+    overflow-x: hidden !important;
+  }
+
+  /* Safe area insets for modern mobile devices */
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Animations - UPDATED for mobile */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(-10px) translateX(-10px); }
+  75% { transform: translateY(-30px) translateX(5px); }
+}
+
+/* New mobile-specific float animation - less movement */
+@keyframes float-mobile {
+  0%, 100% { 
+    transform: translateY(0) translateX(0); 
+  }
+  25% { 
+    transform: translateY(-5px) translateX(2px); 
+  }
+  50% { 
+    transform: translateY(-3px) translateX(-2px); 
+  }
+  75% { 
+    transform: translateY(-8px) translateX(1px); 
+  }
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-scroll {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateX(100px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #00ffff; }
+}
+
+/* Additional mobile fixes */
+@media (max-width: 640px) {
+  /* Reduce particle movement on small screens */
+  .particle {
+    animation-duration: 2s !important;
+    animation-timing-function: ease-in-out !important;
+  }
+  
+  /* Ensure grid background doesn't overflow */
+  .grid-bg {
+    background-size: 30px 30px; /* Smaller grid on mobile */
+  }
+  
+  /* Fix for any 3D transforms that might cause overflow */
+  .transform-gpu {
+    transform: translateZ(0) translateX(0) !important;
+  }
+}
+
+/* Landscape mode fixes */
+@media (max-width: 896px) and (orientation: landscape) {
+  .particle {
+    opacity: 0.2 !important;
+    animation-duration: 4s !important;
+  }
+}
