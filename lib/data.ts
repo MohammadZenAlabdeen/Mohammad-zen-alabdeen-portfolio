@@ -18,7 +18,7 @@ export const EXPERIENCES: Experience[] = [
     period: 'Jan 2023 - Present',
     periodAr: 'يناير 2023 - الحاضر',
     description: 'Specialized in automotive electronics, EEPROM programming, and ECU systems. Performing precision chip soldering and advanced key programming.',
-    descriptionAr: 'متخصص في إلكترونيات السيارات، برمجة EEPROM، وأنظمة ECU. إجراء لحام رقائق دقيقة وبرمجة مفاتيح متقدمة.',
+    descriptionAr: 'متخصص في إلكترونيات السيارات، برمجة EEPROM، وأنظمة ECU. لحام الرقائق الدقيقة وبرمجة مفاتيح متقدمة.',
     tech: ['EEPROM', 'ECU Systems', 'Automotive Electronics']
   },
   {
@@ -30,10 +30,10 @@ export const EXPERIENCES: Experience[] = [
     period: '2024',
     periodAr: '2024',
     description: 'Architected comprehensive library management system with real-time attendance tracking, role-based access control, and resource management.',
-    descriptionAr: 'صممت نظام إدارة مكتبة شامل مع تتبع الحضور في الوقت الفعلي، والتحكم في الوصول القائم على الأدوار، وإدارة الموارد.',
-    tech: ['Backend Architecture', 'Real-time Systems', 'Database Design']
+    descriptionAr: 'صممت نظام إدارة مكتبة شامل مع تتبع الحضور في الوقت الفعلي، والتحكم في الوصول القائم على الأدوار و الصلاحيات، وإدارة الموارد.',
+    tech: ['Backend Architecture', 'Real-time Systems', 'Database Design', 'Laravel','Mysql']
   },
-  {
+ {
     id: 'exp-3',
     title: 'Full-Stack Developer',
     titleAr: 'مطور فل ستاك',
@@ -41,11 +41,11 @@ export const EXPERIENCES: Experience[] = [
     companyAr: 'رواد',
     period: '2025',
     periodAr: '2025',
-    description: 'Developed T-Team car washing app with Next.js and MongoDB. Built admin control panel, mobile app with React Native, and HR-Trust enterprise dashboard.',
-    descriptionAr: 'طورت تطبيق T-Team لغسيل السيارات باستخدام Next.js و MongoDB. بنيت لوحة تحكم إدارية، تطبيق جوال مع React Native، ولوحة معلومات مؤسسية HR-Trust.',
+    description: 'Contributed to T-Team car washing app development by working on the backend, admin dashboard, and React Native mobile application. Also contributed to HR-Trust CMS dashboard using Laravel, which enables full frontend customization for users.',
+    descriptionAr: 'ساهمت في تطوير تطبيق T-Team لغسيل السيارات من خلال العمل على الخلفية، لوحة التحكم الإدارية، وتطبيق الهاتف المحمول بـ React Native. كما ساهمت في تطوير لوحة تحكم نظام إدارة المحتوى لـ HR-Trust باستخدام Laravel، والتي تتيح للمستخدم تخصيص الواجهة الأمامية بالكامل.',
     tech: ['Next.js', 'MongoDB', 'React Native', 'Laravel']
-  },
-  {
+},
+ {
     id: 'exp-4',
     title: 'Embedded Systems Engineer',
     titleAr: 'مهندس أنظمة مدمجة',
@@ -54,9 +54,9 @@ export const EXPERIENCES: Experience[] = [
     period: '2024',
     periodAr: '2024',
     description: 'Led development of semi-autonomous smart car with adaptive cruise control, autonomous parking, and blind spot detection using Arduino and ESP modules.',
-    descriptionAr: 'قادت تطوير سيارة ذكية شبه ذاتية مع تحكم تكيفي في السرعة، ووقوف ذاتي، واكتشاف النقاط العمياء باستخدام Arduino و ESP.',
+    descriptionAr: 'قمت بقيادة تطوير سيارة ذكية شبه ذاتية التحكم، زودت بنظام مثبت سرعة تكيفي، خاصية الركن الذاتي، ونظام اكتشاف النقاط العمياء، وذلك باستخدام منصات Arduino ووحدات ESP.',
     tech: ['Arduino', 'ESP32', 'Python', 'IoT']
-  }
+}
 ] as const;
 
 export const PROJECTS: Project[] = [
@@ -82,7 +82,7 @@ export const PROJECTS: Project[] = [
     nameAr: 'نظام مكتبة الجامعة',
     description: 'Real-time attendance tracking, resource management, and multi-tiered role-based access control.',
     descriptionAr: 'تتبع الحضور في الوقت الفعلي، إدارة الموارد، والتحكم في الوصول متعدد المستويات.',
-    tech: 'Backend Architecture, MySQL'
+    tech: 'Backend Architecture, MySQL, Laravel'
   },
   {
     id: 'proj-4',
@@ -115,12 +115,12 @@ export const SKILLS: Skill[] = [
     id: 'skill-1',
     title: 'Web Development',
     titleAr: 'تطوير الويب',
-    skills: ['React.js', 'Next.js', 'Laravel', 'React Native', 'Tailwind CSS', 'RESTful APIs']
+    skills: ['React.js', 'Next.js', 'Laravel', 'React Native', 'Tailwind CSS', 'RESTful APIs','Websockets']
   },
   {
     id: 'skill-2',
     title: 'Embedded Systems',
-    titleAr: 'الأنظمة المدمجة',
+    titleAr: 'الأنظمة المضمنة',
     skills: ['Arduino', 'ESP32/ESP8266', 'C/C++', 'IoT Systems', 'Sensor Integration']
   },
   {

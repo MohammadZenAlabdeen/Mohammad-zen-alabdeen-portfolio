@@ -13,31 +13,52 @@ export default function ProjectsSection({ language }: ProjectsSectionProps) {
   const [currentProject, setCurrentProject] = useState(0);
   const phoneRef = useRef<HTMLDivElement>(null);
   const phoneInnerRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null); // Ref for the timer
   const isArabic = language === 'ar';
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  // Function to start the auto-slide timer
+  const startTimer = () => {
+    stopTimer();
+    timerRef.current = setInterval(() => {
       setCurrentProject((prev) => (prev + 1) % PROJECTS.length);
     }, 4000);
+  };
 
-    return () => clearInterval(interval);
+  const stopTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => stopTimer();
   }, []);
+
+  const handleManualProjectChange = (index: number) => {
+    setCurrentProject(index);
+    startTimer(); // Reset the timer when user clicks a dot
+  };
 
   const handlePhoneClick = (e: MouseEvent<HTMLDivElement>) => {
     if (!phoneRef.current || !phoneInnerRef.current) return;
 
     const rect = phoneRef.current.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-    let rotateY = 0;
-    if (clickX < width / 3) {
-      rotateY = -15; // Left - bend inward
-    } else if (clickX > (width * 2) / 3) {
-      rotateY = 0; // Right - reset
-    }
+    // Logic to bend inward (away from user) on click
+    const rotateX = (centerY - y) / 8;
+    const rotateY = (x - centerX) / 8;
 
-    phoneInnerRef.current.style.transform = `perspective(1500px) rotateY(${rotateY}deg)`;
+    phoneInnerRef.current.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(0.95, 0.95, 0.95)`;
+
+    // Automatically snap back after a short delay
+    setTimeout(() => {
+      if (phoneInnerRef.current) {
+        phoneInnerRef.current.style.transform = `perspective(1500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      }
+    }, 300);
   };
 
   const project = PROJECTS[currentProject];
@@ -55,11 +76,15 @@ export default function ProjectsSection({ language }: ProjectsSectionProps) {
 
         <div className="flex justify-center">
           <ScrollReveal delay={1}>
-            <div ref={phoneRef} className="phone-3d relative" onClick={handlePhoneClick}>
+            <div 
+              ref={phoneRef} 
+              className="phone-3d relative cursor-pointer" 
+              onClick={handlePhoneClick}
+            >
               {/* Phone Mockup */}
               <div 
                 ref={phoneInnerRef}
-                className="phone-3d-inner w-80 h-[600px] bg-gradient-to-b from-gray-900 to-black rounded-[3rem] border-4 border-gray-800 glow-purple p-3 relative transition-transform duration-600 ease-out"
+                className="phone-3d-inner w-80 h-[600px] bg-gradient-to-b from-gray-900 to-black rounded-[3rem] border-4 border-gray-800 glow-purple p-3 relative transition-all duration-300 ease-out"
                 style={{ transformStyle: 'preserve-3d' }}
               >
                 {/* Notch */}
@@ -67,14 +92,12 @@ export default function ProjectsSection({ language }: ProjectsSectionProps) {
                 
                 {/* Screen */}
                 <div className="w-full h-full phone-screen p-6 flex flex-col">
-                  {/* Project Counter */}
                   <div className="text-xs text-cyan-400 mb-2 font-bold font-rajdhani">
                     {projectLabel} {currentProject + 1}/{PROJECTS.length}
                   </div>
                   
-                  {/* Project Content */}
                   <div className="flex-1">
-                    <div className="project-slide">
+                    <div className="project-slide" key={currentProject}>
                       <h3 className="text-2xl font-bold text-cyan-400 mb-4 font-orbitron">
                         {project[isArabic ? 'nameAr' : 'name']}
                       </h3>
@@ -98,8 +121,8 @@ export default function ProjectsSection({ language }: ProjectsSectionProps) {
                       <button
                         key={i}
                         onClick={(e) => {
-                          e.stopPropagation();
-                          setCurrentProject(i);
+                          e.stopPropagation(); // Prevent phone from bending when clicking dots
+                          handleManualProjectChange(i);
                         }}
                         className={`h-1.5 rounded-full transition-all ${
                           i === currentProject 

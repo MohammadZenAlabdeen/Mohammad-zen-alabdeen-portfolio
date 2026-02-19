@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { Language } from '@/types';
 import Typewriter from './Typewriter';
@@ -35,10 +34,10 @@ export default function HeroSection({ language }: HeroSectionProps) {
               />
             </div>
             
-            {/* Glow Effect - Fixed for mobile */}
+            {/* Glow Effect */}
             <div className={`
               absolute inset-0 rounded-full 
-              bg-gradient-to-r from-cyan-400/20 via-purple-500/20 to-red-600/20 
+              bg-gradient-to-r from-cyan-400/20 via-purple-500/20 to-red-600/20
               animate-pulse -z-10
               ${isArabic ? 'md:blur-3xl blur-xl' : 'md:blur-3xl blur-xl'}
             `} />
@@ -61,25 +60,27 @@ export default function HeroSection({ language }: HeroSectionProps) {
           
           <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8">
             {isArabic 
-              ? 'مطور ذو نتائج مثبتة يتمتع بخبرة في تطبيقات الويب، برمجة المتحكمات الدقيقة، والإلكترونيات السيارات. صياغة حلول مبتكرة عند تقاطع البرمجيات والأجهزة، من تطبيقات Next.js إلى أنظمة المركبات ذاتية القيادة.'
+              ? 'مطور ذو نتائج مثبتة يتمتع بخبرة في تطبيقات الويب، برمجة المتحكمات الدقيقة، والكترونيات السيارات. اصيغ حلول مبتكرة عند تقاطع البرمجيات والأجهزة، من تطبيقات Next.js إلى الأنظمة المضمنة.'
               : 'Results-driven developer with expertise in web applications, microcontroller programming, and automotive electronics. Crafting innovative solutions at the intersection of software and hardware, from Next.js applications to autonomous vehicle systems.'
             }
           </p>
           
           <div className="flex gap-4 justify-center md:justify-start flex-wrap">
             <a 
-              href="#contact" 
+              href="#contact"
               className="px-6 md:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-bold hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-shadow font-rajdhani"
             >
               {isArabic ? 'تواصل معي' : 'Get in Touch'}
             </a>
+
+            {/* DOWNLOAD CV BUTTON */}
             <a 
-              href="https://github.com/MohammadZenAlabdeen"
+              href="https://drive.google.com/uc?export=download&id=1scpHgxbrFB_PE_BZE74OlGT2eu4DLHRW"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 md:px-8 py-3 border-2 border-cyan-400 rounded-lg font-bold hover:bg-cyan-400/10 transition-colors font-rajdhani"
             >
-              GitHub
+              {isArabic ? 'تحميل السيرة الذاتية' : 'Download CV'}
             </a>
           </div>
         </div>

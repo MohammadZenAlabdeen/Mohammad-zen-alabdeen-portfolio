@@ -56,7 +56,7 @@ export default function ContactSection({ language }: ContactSectionProps) {
           <p>
             {isArabic 
               ? '© 2026 محمد ياسين زين العابدين. جميع الحقوق محفوظة.'
-              : '© 2026 Mohammad Yasen Zen Al Abdeen. All rights reserved.'
+              : '© 2026 Mohammad Yaseen Zen Al Abdeen. All rights reserved.'
             }
           </p>
           <p className="text-sm mt-2">

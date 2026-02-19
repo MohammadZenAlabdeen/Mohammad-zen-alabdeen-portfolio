@@ -12,21 +12,25 @@ export default function Card3D({ children, className }: Card3DProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || !innerRef.current) return;
+ // Inside Card3D component...
+const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  if (!cardRef.current || !innerRef.current) return;
 
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  const rect = cardRef.current.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
 
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
+  // FLIPPED SIGNS: 
+  // centerY - y makes the bottom tilt away when touched at the bottom
+  // x - centerX makes the right tilt away when touched at the right
+  const rotateX = (centerY - y) / 10; 
+  const rotateY = (x - centerX) / 10;
 
-    innerRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-  };
+  innerRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(0.98, 0.98, 0.98)`;
+};
 
   const handleMouseLeave = () => {
     if (!innerRef.current) return;
